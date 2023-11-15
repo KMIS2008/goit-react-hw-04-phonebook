@@ -21,55 +21,58 @@ const contactBook = [
       return savedContacts !== null ? JSON.parse(savedContacts) : contactBook;
     };
 
-export const App = ()=> {
-
+    export const App =()=> {
   const [filter, setFilter] = useState('');
   const [contacts, setContacts] = useState(getContactsLocalStorege);
 
   useEffect(() => {
     window.localStorage.setItem("contactsKey", JSON.stringify(contacts));
   }, [contacts]);
-
-  const addContact =newContact=> {
-
-    const newAddContact = contacts.some(contact=> newContact.name.toLowerCase().trim() === contact.name.toLowerCase());
-
-      if(newAddContact){
-        alert(`${newContact.name} is already in contacts`);
-        return;
-      }
-
-      setContacts(prevContact=>[...prevContact, { ...newContact, id: nanoid() }]);
-  };
-
-  const filterName = setFilter("newName");
-
-  const deleteContact = contactId =>{
-    setContacts(prevContacts=>
-      prevContacts.filter(contact=> contact.id !== contactId)
-    )
-  };
-
-  const visibleContact = setContacts(contacts.filter(contact=> 
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  )
-  )
-
-  return (
-    <Contater>
-     
-    <SectionTitle title="Phonebook"/>
-
-    <FormAddContact onAdd={addContact} />
-   
-    <TitleContacts>Contacts</TitleContacts>
-
-    <FilterConctacts filter={filter} onNameFilter={filterName}/>
     
-    <ContactsList contacts ={visibleContact} ondelete={deleteContact}/>
-  
-      <GlobalStyle/>
+      const addContact =(newContact)=> {
+    
+        const newAddContact = contacts.some(contact=> newContact.name.toLowerCase().trim() === contact.name.toLowerCase());
+    
+          if(newAddContact){
+            alert(`${newContact.name} is already in contacts`);
+            return;
+          }
 
-    </Contater>
-  );
-};
+          setContacts(prevContact=>[...prevContact, { ...newContact, id: nanoid() }]);
+      }
+    
+      const filterName =(newName)=>setFilter(newName);
+      
+    
+      const deleteContact = contactId =>{
+          setContacts(prevContacts=>
+            prevContacts.filter(contact=> contact.id !== contactId)
+         )
+        };
+
+    
+        const visibleContact = contacts.filter(contact=>{
+          const hasContact = contact.name.toLowerCase().includes(filter.toLowerCase());
+          return hasContact;
+        })
+    
+      return (
+        <Contater>
+         
+        <SectionTitle title="Phonebook"/>
+    
+        <FormAddContact onAdd={addContact} />
+       
+        <TitleContacts>Contacts</TitleContacts>
+    
+        <FilterConctacts filter={filter} onNameFilter={filterName}/>
+        
+        <ContactsList contacts ={visibleContact} ondelete={deleteContact}/>
+      
+    
+          <GlobalStyle/>
+    
+        </Contater>
+      );
+    };
+    
