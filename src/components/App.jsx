@@ -22,8 +22,8 @@ const contactBook = [
     };
 
     export const App =()=> {
-  const [filter, setFilter] = useState('');
-  const [contacts, setContacts] = useState(getContactsLocalStorege);
+       const [filter, setFilter] = useState('');
+       const [contacts, setContacts] = useState(getContactsLocalStorege);
 
   useEffect(() => {
     window.localStorage.setItem("contactsKey", JSON.stringify(contacts));
