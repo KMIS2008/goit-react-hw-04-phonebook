@@ -59,18 +59,17 @@ const contactBook = [
       return (
         <Contater>
          
-        <SectionTitle title="Phonebook"/>
+           <SectionTitle title="Phonebook"/>
     
-        <FormAddContact onAdd={addContact} />
+           <FormAddContact onAdd={addContact} />
        
-        <TitleContacts>Contacts</TitleContacts>
+           <TitleContacts>Contacts</TitleContacts>
     
-        <FilterConctacts filter={filter} onNameFilter={filterName}/>
+           <FilterConctacts filter={filter} onNameFilter={filterName}/>
         
-        <ContactsList contacts ={visibleContact} ondelete={deleteContact}/>
+           <ContactsList contacts ={visibleContact} ondelete={deleteContact}/>
       
-    
-          <GlobalStyle/>
+           <GlobalStyle/>
     
         </Contater>
       );
